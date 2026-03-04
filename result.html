@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSV Data Report</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    ::selection { background: #22c55e; color: black; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #1f2937;
+    }
+    th {
+      background-color: #374151;
+      color: #d1fae5;
+      font-weight: bold;
+    }
+    table td, table th {
+      padding: 8px;
+      border: 1px solid #2d2d2d;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-white font-sans p-4 md:p-8">
+
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold text-green-400 mb-6 text-center">📊 CSV Data Report</h1>
+
+    <!-- Summary Statistics -->
+    <div class="bg-gray-900 rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-semibold text-green-300 mb-4">Summary Statistics</h2>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {% for key, value in stats.items() %}
+          <li class="bg-gray-800 rounded-md p-4 text-lg font-medium text-green-100 shadow">
+            {{ key }}: <span class="text-white font-semibold">{{ value }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Data Preview -->
+    <div class="bg-gray-900 rounded-lg shadow-lg p-6 mb-8 overflow-auto">
+      <h2 class="text-2xl font-semibold text-green-300 mb-4">Data Preview</h2>
+      <div class="overflow-x-auto rounded-lg border border-gray-700">
+        {{ preview|safe }}
+      </div>
+    </div>
+
+    <!-- Download PDF Button -->
+    <div class="text-center">
+      <a href="{{ pdf_url }}" 
+         class="inline-block bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-6 rounded-lg shadow-lg transition hover:scale-105">
+        📥 Download PDF Report
+      </a>
+    </div>
+  </div>
+</body>
+</html>
